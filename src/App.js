@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useState } from 'react'
+import axios from 'axios';
 function App() {
+  const [fact, setFact] = useState(" ");
+   function getFact()
+  {
+     axios.get("https://api.chucknorris.io/jokes/random")
+       .then((response) => {
+         setFact(response.data.value);
+     })
+    
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button type="button" onClick={getFact} className='btn'>
+        New Fact
+      </button>
+      <h1 className='container'>{fact}</h1>
     </div>
   );
 }
